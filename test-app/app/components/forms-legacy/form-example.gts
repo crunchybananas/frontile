@@ -5,7 +5,6 @@ import { fn } from '@ember/helper';
 
 import FormInput from '@frontile/forms-legacy/components/form-input';
 import FormTextarea from '@frontile/forms-legacy/components/form-textarea';
-import FormSelect from '@frontile/forms-legacy/components/form-select';
 import FormCheckbox from '@frontile/forms-legacy/components/form-checkbox';
 import FormCheckboxGroup from '@frontile/forms-legacy/components/form-checkbox-group';
 import FormRadioGroup from '@frontile/forms-legacy/components/form-radio-group';
@@ -149,24 +148,6 @@ export default class FormExample extends Component<FormExampleArgs> {
       @containerClass="mt-4"
       @size={{this.size}}
     />
-
-    <FormSelect
-      @isMultiple={{false}}
-      @size={{this.size}}
-      @containerClass="mt-4"
-      @hint="Select your country of residence"
-      @errors={{this.countryErrors}}
-      @allowClear={{true}}
-      @label="Country"
-      @searchEnabled={{true}}
-      @searchField="name"
-      @options={{this.countries}}
-      @selected={{this.country}}
-      @onChange={{this.setCountry}}
-      as |country|
-    >
-      {{country.name}}
-    </FormSelect>
 
     <FormRadioGroup
       @label="Account Type"

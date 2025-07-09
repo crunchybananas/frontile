@@ -55,8 +55,7 @@
     "@embroider/addon-shim": "^1.9.0",
     "@frontile/theme": "workspace:0.17.0-beta.10",
     "@glint/template": "1.5.2",
-    "ember-basic-dropdown": "^8.4.0",
-    "ember-power-select": "^8.6.2"
+    "ember-basic-dropdown": "^8.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.26.7",
@@ -111,7 +110,6 @@
       "./components/form-input.js": "./dist/_app_/components/form-input.js",
       "./components/form-radio-group.js": "./dist/_app_/components/form-radio-group.js",
       "./components/form-radio.js": "./dist/_app_/components/form-radio.js",
-      "./components/form-select.js": "./dist/_app_/components/form-select.js",
       "./components/form-textarea.js": "./dist/_app_/components/form-textarea.js"
     }
   }

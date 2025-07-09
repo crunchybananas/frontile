@@ -11,7 +11,6 @@ import type FormField from './components/form-field';
 import type FormInput from './components/form-input';
 import type FormRadioGroup from './components/form-radio-group';
 import type FormRadio from './components/form-radio';
-import type FormSelect from './components/form-select';
 import type FormTextarea from './components/form-textarea';
 
 export default interface Registry {

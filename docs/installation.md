@@ -44,9 +44,6 @@ module.exports = {
 
   safelist: [
     ...safelist,
-
-    // Power Select
-    { pattern: /^ember-power-select/ }
   ]
   // ...
 };
