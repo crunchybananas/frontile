@@ -8,7 +8,7 @@ import {
   NativeSelect,
   Select,
   RadioGroup,
-  CheckboxGroup
+  CheckboxGroup,
 } from '@frontile/forms';
 
 const animals = [
@@ -25,7 +25,7 @@ const animals = [
   'panda',
   'penguin',
   'tiger',
-  'zebra'
+  'zebra',
 ];
 
 const selectedAnimals = ['elephant'];
@@ -59,17 +59,9 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
 
       <Select @label="Animals" @items={{animals}} @placeholder="Placeholder" />
 
-      <Select
-        @label="Animals"
-        @items={{animals}}
-        @selectedKeys={{selectedAnimals}}
-      />
+      <Select @label="Animals" @items={{animals}} @selectedKeys={{selectedAnimals}} />
 
-      <Select
-        @label="Animals"
-        @items={{animals}}
-        @description="a list of animals"
-      />
+      <Select @label="Animals" @items={{animals}} @description="a list of animals" />
 
       <Select @label="Animals" @items={{animals}} @errors="select an animal" />
       <Select @label="Animals" @items={{animals}} @isDisabled={{true}} />
@@ -80,10 +72,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
 
       <Textarea @label="Bio" placeholder="Placeholder" />
 
-      <Textarea
-        @label="Bio"
-        @value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr."
-      />
+      <Textarea @label="Bio" @value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr." />
 
       <Textarea @label="Bio" @description="Your biography" />
 
@@ -95,29 +84,13 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
     <div class="pt-4 flex flex-1 flex-col gap-4">
       <Title>NativeSelect</Title>
 
-      <NativeSelect
-        @label="Animals"
-        @items={{animals}}
-        @placeholder="Placeholder"
-      />
+      <NativeSelect @label="Animals" @items={{animals}} @placeholder="Placeholder" />
 
-      <NativeSelect
-        @label="Animals"
-        @items={{animals}}
-        @selectedKeys={{selectedAnimals}}
-      />
+      <NativeSelect @label="Animals" @items={{animals}} @selectedKeys={{selectedAnimals}} />
 
-      <NativeSelect
-        @label="Animals"
-        @items={{animals}}
-        @description="a list of animals"
-      />
+      <NativeSelect @label="Animals" @items={{animals}} @description="a list of animals" />
 
-      <NativeSelect
-        @label="Animals"
-        @items={{animals}}
-        @errors="select an animal"
-      />
+      <NativeSelect @label="Animals" @items={{animals}} @errors="select an animal" />
       <NativeSelect @label="Animals" @items={{animals}} disabled={{true}} />
     </div>
 
@@ -130,11 +103,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
 
       <Checkbox @label="Checked" @checked={{true}} />
 
-      <Checkbox
-        @checked={{false}}
-        @label="Disabled unchecked"
-        disabled={{true}}
-      />
+      <Checkbox @checked={{false}} @label="Disabled unchecked" disabled={{true}} />
 
       <Checkbox @label="Disabled checked" @checked={{true}} disabled={{true}} />
 
@@ -182,11 +151,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
         <Checkbox @label="Option 3" />
       </CheckboxGroup>
 
-      <CheckboxGroup
-        @label="I'm a horizontal group"
-        @orientation="horizontal"
-        as |Checkbox|
-      >
+      <CheckboxGroup @label="I'm a horizontal group" @orientation="horizontal" as |Checkbox|>
         <Checkbox @label="Options 1" />
         <Checkbox @checked={{true}} @label="Option 2" />
         <Checkbox @label="Option 3" />
@@ -204,12 +169,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
 
       <Radio @value="false" @label="Disabled unchecked" disabled={{true}} />
 
-      <Radio
-        @label="Disabled checked"
-        @value="true"
-        @checkedValue="true"
-        disabled={{true}}
-      />
+      <Radio @label="Disabled checked" @value="true" @checkedValue="true" disabled={{true}} />
 
       <Radio
         @value="false"
@@ -258,12 +218,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
         <Radio @value="3" @label="Option 3" />
       </RadioGroup>
 
-      <RadioGroup
-        @value="2"
-        @label="I'm a horizontal group"
-        @orientation="horizontal"
-        as |Radio|
-      >
+      <RadioGroup @value="2" @label="I'm a horizontal group" @orientation="horizontal" as |Radio|>
         <Radio @value="1" @label="Options 1" />
         <Radio @value="2" @label="Option 2" />
         <Radio @value="3" @label="Option 3" />

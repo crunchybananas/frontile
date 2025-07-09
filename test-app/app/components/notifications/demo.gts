@@ -1,21 +1,14 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-import {
-  Form,
-  Checkbox,
-  Input,
-  RadioGroup,
-  Select,
-  type FormResultData
-} from '@frontile/forms';
+import { Form, Checkbox, Input, RadioGroup, Select, type FormResultData } from '@frontile/forms';
 import { Button } from '@frontile/buttons';
 import {
   NotificationsContainer,
   type CustomAction,
   type NotificationOptions,
   type NotificationsContainerSignature,
-  type NotificationsService
+  type NotificationsService,
 } from '@frontile/notifications';
 
 interface DemoArgs {}
@@ -26,28 +19,27 @@ const customActionsOptions = [
     label: 'Ok',
     onClick: () => {
       // empty
-    }
+    },
   },
   {
     key: 'undo',
     label: 'Undo',
     onClick: () => {
       // empty
-    }
+    },
   },
   {
     key: 'cancel',
     label: 'Cancel',
     onClick: () => {
       // empty
-    }
-  }
+    },
+  },
 ];
 
 export default class Demo extends Component<DemoArgs> {
   @service notifications!: NotificationsService;
-  @tracked placement: NotificationsContainerSignature['Args']['placement'] =
-    'bottom-right';
+  @tracked placement: NotificationsContainerSignature['Args']['placement'] = 'bottom-right';
   @tracked customActions: string[] = ['ok'];
 
   onChangeCustomActions = (keys: string[]) => {
@@ -56,27 +48,19 @@ export default class Demo extends Component<DemoArgs> {
 
   handleForm = (data: FormResultData, eventType: 'input' | 'submit') => {
     if (data['placement']) {
-      this.placement = data[
-        'placement'
-      ] as NotificationsContainerSignature['Args']['placement'];
+      this.placement = data['placement'] as NotificationsContainerSignature['Args']['placement'];
     }
 
     if (eventType === 'submit') {
-      this.notifications.add(
-        'Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.',
-        {
-          appearance: data['appearance'] as NotificationOptions['appearance'],
-          preserve: data['preserve'] == 'on',
-          duration: parseInt(data['duration'] as string) || 5000,
-          allowClosing: data['allowClosing'] == 'on',
-          customActions: this.customActions.map(
-            (key) =>
-              customActionsOptions.find(
-                (action) => action.key === key
-              ) as CustomAction
-          )
-        }
-      );
+      this.notifications.add('Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.', {
+        appearance: data['appearance'] as NotificationOptions['appearance'],
+        preserve: data['preserve'] == 'on',
+        duration: parseInt(data['duration'] as string) || 5000,
+        allowClosing: data['allowClosing'] == 'on',
+        customActions: this.customActions.map(
+          (key) => customActionsOptions.find((action) => action.key === key) as CustomAction
+        ),
+      });
     }
   };
 

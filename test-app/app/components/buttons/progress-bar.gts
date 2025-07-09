@@ -8,55 +8,20 @@ const Comp: TOC<null> = <template>
   </h2>
   <div class="mt-6 grid grid-cols-5 gap-4">
     <ProgressBar @progress={{50}} @label="Default" @showValueLabel={{false}} />
-    <ProgressBar
-      @progress={{50}}
-      @label="Primary"
-      @intent="primary"
-      @showValueLabel={{false}}
-    />
-    <ProgressBar
-      @progress={{50}}
-      @label="Success"
-      @intent="success"
-      @showValueLabel={{false}}
-    />
-    <ProgressBar
-      @progress={{50}}
-      @label="Warning"
-      @intent="warning"
-      @showValueLabel={{false}}
-    />
-    <ProgressBar
-      @progress={{50}}
-      @label="Danger"
-      @intent="danger"
-      @showValueLabel={{false}}
-    />
+    <ProgressBar @progress={{50}} @label="Primary" @intent="primary" @showValueLabel={{false}} />
+    <ProgressBar @progress={{50}} @label="Success" @intent="success" @showValueLabel={{false}} />
+    <ProgressBar @progress={{50}} @label="Warning" @intent="warning" @showValueLabel={{false}} />
+    <ProgressBar @progress={{50}} @label="Danger" @intent="danger" @showValueLabel={{false}} />
   </div>
 
   <h2 class="text-2xl mt-6">
     Sizes
   </h2>
   <div class="mt-6 grid grid-cols-4 gap-4 items-center">
-    <ProgressBar
-      @progress={{50}}
-      @size="xs"
-      @label="XSmall"
-      @showValueLabel={{false}}
-    />
-    <ProgressBar
-      @progress={{50}}
-      @size="sm"
-      @label="Small"
-      @showValueLabel={{false}}
-    />
+    <ProgressBar @progress={{50}} @size="xs" @label="XSmall" @showValueLabel={{false}} />
+    <ProgressBar @progress={{50}} @size="sm" @label="Small" @showValueLabel={{false}} />
     <ProgressBar @progress={{50}} @label="Normal" @showValueLabel={{false}} />
-    <ProgressBar
-      @progress={{50}}
-      @size="lg"
-      @label="Large"
-      @showValueLabel={{false}}
-    />
+    <ProgressBar @progress={{50}} @size="lg" @label="Large" @showValueLabel={{false}} />
   </div>
 
   <h2 class="text-2xl mt-6">
@@ -104,21 +69,9 @@ const Comp: TOC<null> = <template>
       @maxValue={{50}}
       @label="Interpolated progress"
     />
-    <ProgressBar
-      @progress={{50}}
-      @label="Hiding label value"
-      @showValueLabel={{false}}
-    />
-    <ProgressBar
-      @progress={{50}}
-      @label="Custom label value"
-      @valueLabel="4 out of 8"
-    />
-    <ProgressBar
-      @progress={{25}}
-      @label="Custom label value"
-      @valueLabel="1/4"
-    />
+    <ProgressBar @progress={{50}} @label="Hiding label value" @showValueLabel={{false}} />
+    <ProgressBar @progress={{50}} @label="Custom label value" @valueLabel="4 out of 8" />
+    <ProgressBar @progress={{25}} @label="Custom label value" @valueLabel="1/4" />
     <ProgressBar
       @progress={{50}}
       @label="Custom formatter"

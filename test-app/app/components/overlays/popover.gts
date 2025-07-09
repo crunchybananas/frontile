@@ -24,18 +24,14 @@ export default class Example extends Component {
     <Button {{on "click" this.open}}>Open</Button>
     <Divider class="my-4" />
 
-    <Popover
-      @isOpen={{this.isOpen}}
-      @onOpenChange={{this.onOpenChange}}
-      as |pop|
-    >
+    <Popover @isOpen={{this.isOpen}} @onOpenChange={{this.onOpenChange}} as |pop|>
       <Button {{pop.trigger}} {{pop.anchor}}>
         Toggle Popover
       </Button>
 
       <pop.Content @class="p-4">
-        This is some example content for the popover. Check the nested popover
-        by clicking the button below.
+        This is some example content for the popover. Check the nested popover by clicking the
+        button below.
 
         <Button {{on "click" this.close}}>Close Popover</Button>
       </pop.Content>

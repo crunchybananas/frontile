@@ -19,7 +19,7 @@ const animals = [
   'panda',
   'penguin',
   'tiger',
-  'zebra'
+  'zebra',
 ];
 
 export default class Example extends Component {

@@ -13,9 +13,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
   <template>
     {{! @glint-nocheck }}
     <div class="pt-4 border-t">
-      <h1
-        class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary"
-      >
+      <h1 class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary">
         FormInput
       </h1>
 
@@ -23,11 +21,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
 
       <FormInput @label="First Name" @value="Robert" @containerClass="mt-4" />
 
-      <FormInput
-        @label="First Name"
-        @hint="Your first name"
-        @containerClass="mt-4"
-      />
+      <FormInput @label="First Name" @hint="Your first name" @containerClass="mt-4" />
 
       <FormInput
         @label="First Name"
@@ -40,9 +34,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
     </div>
 
     <div class="mt-8 pt-4 border-t">
-      <h1
-        class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary"
-      >
+      <h1 class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary">
         FormTextarea
       </h1>
 
@@ -54,11 +46,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
         @containerClass="mt-4"
       />
 
-      <FormTextarea
-        @label="Bio"
-        @hint="Your biography"
-        @containerClass="mt-4"
-      />
+      <FormTextarea @label="Bio" @hint="Your biography" @containerClass="mt-4" />
 
       <FormTextarea
         @label="Bio"
@@ -67,17 +55,11 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
         @hasSubmitted={{true}}
       />
 
-      <FormTextarea
-        @label="Disabled"
-        @containerClass="mt-4"
-        disabled={{true}}
-      />
+      <FormTextarea @label="Disabled" @containerClass="mt-4" disabled={{true}} />
     </div>
 
     <div class="mt-8 pt-4 border-t">
-      <h1
-        class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary"
-      >
+      <h1 class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary">
         FormCheckbox
       </h1>
 
@@ -115,9 +97,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
     </div>
 
     <div class="mt-8 pt-4 border-t">
-      <h1
-        class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary"
-      >
+      <h1 class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary">
         FormCheckboxGroup
       </h1>
 
@@ -164,20 +144,13 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
     </div>
 
     <div class="mt-8 pt-4 border-t">
-      <h1
-        class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary"
-      >
+      <h1 class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary">
         FormRadio
       </h1>
 
       <FormRadio @value={{false}} @label="Unchecked" />
 
-      <FormRadio
-        @label="Checked"
-        @value={{true}}
-        @checked={{true}}
-        @containerClass="mt-4"
-      />
+      <FormRadio @label="Checked" @value={{true}} @checked={{true}} @containerClass="mt-4" />
 
       <FormRadio
         @value={{false}}
@@ -211,9 +184,7 @@ export default class StyleVariants extends Component<StyleVariantsArgs> {
     </div>
 
     <div class="my-8 pt-4 border-t">
-      <h1
-        class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary"
-      >
+      <h1 class="mb-6 text-2xl font-bold inline-block border-b-4 border-primary">
         FormRadioGroup
       </h1>
 

@@ -19,7 +19,7 @@ const animals = [
   'panda',
   'penguin',
   'tiger',
-  'zebra'
+  'zebra',
 ];
 
 const animalsAsOject = [
@@ -36,7 +36,7 @@ const animalsAsOject = [
   { key: 'panda', label: 'Panda' },
   { key: 'penguin', label: 'Penguin' },
   { key: 'tiger', label: 'Tiger' },
-  { key: 'zebra', label: 'Zebra' }
+  { key: 'zebra', label: 'Zebra' },
 ];
 
 export default class Example extends Component {

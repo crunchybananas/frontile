@@ -30,7 +30,7 @@ export default class FormExample extends Component<FormExampleArgs> {
     { name: 'Russia', code: 'RU', disabled: true },
     { name: 'Latvia', code: 'LV' },
     { name: 'Brazil', code: 'BR' },
-    { name: 'United Kingdom', code: 'GB' }
+    { name: 'United Kingdom', code: 'GB' },
   ];
 
   get firstNameErrors(): string[] {
@@ -160,11 +160,7 @@ export default class FormExample extends Component<FormExampleArgs> {
       as |Radio|
     >
       <Radio @value="personal" @label="Personal" />
-      <Radio
-        @value="business"
-        @label="Business"
-        @hint="If this account is for business"
-      />
+      <Radio @value="business" @label="Business" @hint="If this account is for business" />
       <Radio @value="other" @label="Other" />
     </FormRadioGroup>
 

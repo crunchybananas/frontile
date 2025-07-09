@@ -9,7 +9,7 @@ export default class Example extends Component {
   isSelected = {
     first: false,
     second: false,
-    third: false
+    third: false,
   };
 
   @action
@@ -31,10 +31,7 @@ export default class Example extends Component {
 
       <ButtonGroup @size="sm" @intent="primary" as |g|>
         {{#each-in this.isSelected as |key val|}}
-          <g.ToggleButton
-            @isSelected={{val}}
-            @onChange={{(fn this.onChange key)}}
-          >
+          <g.ToggleButton @isSelected={{val}} @onChange={{(fn this.onChange key)}}>
             {{key}}
           </g.ToggleButton>
         {{/each-in}}

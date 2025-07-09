@@ -11,8 +11,8 @@ export default class IndexRoute extends Route {
         { name: 'Blue', colors: blue },
         { name: 'Green', colors: green },
         { name: 'Red', colors: red },
-        { name: 'Yellow', colors: yellow }
-      ]
+        { name: 'Yellow', colors: yellow },
+      ],
     };
   }
 }

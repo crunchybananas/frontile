@@ -12,7 +12,7 @@ import {
   Select,
   RadioGroup,
   CheckboxGroup,
-  Switch
+  Switch,
 } from '@frontile/forms';
 import { Spinner } from '@frontile/utilities';
 
@@ -30,7 +30,7 @@ const animals = [
   'panda',
   'penguin',
   'tiger',
-  'zebra'
+  'zebra',
 ];
 
 const stringify = JSON.stringify;
@@ -185,11 +185,7 @@ export default class FormExample extends Component<FormExampleArgs> {
         as |Radio|
       >
         <Radio @value="personal" @label="Personal" />
-        <Radio
-          @value="business"
-          @label="Business"
-          @description="If this account is for business"
-        />
+        <Radio @value="business" @label="Business" @description="If this account is for business" />
         <Radio @value="other" @label="Other" />
       </RadioGroup>
 

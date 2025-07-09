@@ -13,7 +13,7 @@ export default class Example extends Component<ExampleArgs> {
     primary: false,
     success: false,
     warning: false,
-    danger: false
+    danger: false,
   };
 
   @action
@@ -28,11 +28,7 @@ export default class Example extends Component<ExampleArgs> {
     </h2>
     <div class="mt-6">
       {{#each-in this.isSelected as |key val|}}
-        <ToggleButton
-          @isSelected={{val}}
-          @onChange={{(fn this.onChange key)}}
-          @intent={{key}}
-        >
+        <ToggleButton @isSelected={{val}} @onChange={{(fn this.onChange key)}} @intent={{key}}>
           Toggle
         </ToggleButton>
       {{/each-in}}
