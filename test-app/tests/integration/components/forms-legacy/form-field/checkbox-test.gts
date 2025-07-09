@@ -1,7 +1,8 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { render, click, settled } from '@ember/test-helpers';
+import Checkbox from '@frontile/forms-legacy/components/form-field/checkbox';
+import { cell } from 'ember-resources';
 
 module(
   'Integration | Component | @frontile/forms-legacy/FormField::Checkbox',
@@ -9,29 +10,36 @@ module(
     setupRenderingTest(hooks);
 
     test('it renders with html attributes', async function (assert) {
-      await render(hbs`<FormField::Checkbox
-                      name="some-name"
-                      data-test-checkbox />`);
+      await render(
+        <template>
+          <Checkbox
+            name="some-name"
+            data-test-checkbox
+          />
+        </template>
+      );
 
       assert.dom('[data-test-checkbox]').exists();
       assert.dom('[name="some-name"]').exists();
     });
 
     test('it renders @id arg', async function (assert) {
-      await render(hbs`<FormField::Checkbox @id="my-id" data-test-checkbox />`);
+      await render(<template><Checkbox @id="my-id" data-test-checkbox /></template>);
 
       assert.dom('[data-test-checkbox]').hasAttribute('id', 'my-id');
     });
 
     test('it renders id html attribute', async function (assert) {
-      await render(hbs`<FormField::Checkbox id="my-id" data-test-checkbox />`);
+      await render(<template><Checkbox @id="my-id" data-test-checkbox /></template>);
 
       assert.dom('[data-test-checkbox]').hasAttribute('id', 'my-id');
     });
 
     test('it renders @name arg', async function (assert) {
       await render(
-        hbs`<FormField::Checkbox @name="my-name" data-test-checkbox />`
+        <template>
+          <Checkbox @name="my-name" data-test-checkbox />
+        </template>
       );
 
       assert.dom('[data-test-checkbox]').hasAttribute('name', 'my-name');
@@ -39,40 +47,45 @@ module(
 
     test('it renders name html attribute', async function (assert) {
       await render(
-        hbs`<FormField::Checkbox name="my-name" data-test-checkbox />`
+        <template>
+          <Checkbox @name="my-name" data-test-checkbox />
+        </template>
       );
 
       assert.dom('[data-test-checkbox]').hasAttribute('name', 'my-name');
     });
 
     test('renders @checed arg, does not mutate it by default', async function (assert) {
-      this.set('value', true);
-
+      const value = cell(true);
       await render(
-        hbs`<FormField::Checkbox data-test-checkbox @checked={{this.value}} />`
+        <template>
+          <Checkbox data-test-checkbox @checked={{value.current}} />
+        </template>
       );
 
       assert.dom('[data-test-checkbox]').isChecked();
       await click('[data-test-checkbox]');
 
-      assert.equal(this.value, true, 'should have not mutated the value');
+      assert.equal(value.current, true, 'should have not mutated the value');
     });
 
     test('should call @onChange function arg', async function (assert) {
       assert.expect(4);
-      this.set('value', undefined);
+      const value = cell<boolean>();
 
-      this.set('setName', (value: string) => {
-        this.set('value', value);
+      const setName = (newValue: boolean) => {
+        value.current = newValue;
         assert.ok(true, 'should have called function');
-      });
+      };
 
       await render(
-        hbs`<FormField::Checkbox
+        <template>
+          <Checkbox
             data-test-checkbox
-            @value={{this.value}}
-            @onChange={{this.setName}}
-          />`
+            @checked={{value.current}}
+            @onChange={{setName}}
+          />
+        </template>
       );
 
       assert.dom('[data-test-checkbox]').isNotChecked();
@@ -80,25 +93,29 @@ module(
       await click('[data-test-checkbox]');
 
       assert.dom('[data-test-checkbox]').isChecked();
-      assert.equal(this.value, true, 'should have mutated the value');
+      assert.equal(value.current, true, 'should have mutated the value');
     });
 
     test('it sets as checked if value is truthy', async function (assert) {
-      this.set('value', undefined);
+      const value = cell<boolean>();
 
       await render(
-        hbs`<FormField::Checkbox
+        <template>
+          <Checkbox
             data-test-checkbox
-            @checked={{this.value}}
-          />`
+            @checked={{value.current}}
+          />
+        </template>
       );
 
       assert.dom('[data-test-checkbox]').isNotChecked();
 
-      this.set('value', true);
+      value.current = true;
+      await settled();
       assert.dom('[data-test-checkbox]').isChecked();
 
-      this.set('value', false);
+      value.current = false;
+      await settled();
       assert.dom('[data-test-checkbox]').isNotChecked();
     });
   }

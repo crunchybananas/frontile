@@ -1,9 +1,11 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, render, triggerEvent, find } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { click, render, triggerEvent, find, settled } from '@ember/test-helpers';
 import { registerCustomStyles } from '@frontile/theme';
 import { tv } from 'tailwind-variants';
+import { Popover } from '@frontile/overlays';
+import { on } from '@ember/modifier';
+import { cell } from 'ember-resources';
 
 module(
   'Integration | Component | Popover | @frontile/overlays',
@@ -24,7 +26,7 @@ module(
 
     test('it works with trigger and opening content', async function (assert) {
       await render(
-        hbs`
+        <template>
           <Popover as |p|>
             <button {{p.trigger}} {{p.anchor}} data-test-id="trigger">
               Trigger
@@ -35,7 +37,8 @@ module(
             >
               Content here
             </p.Content>
-          </Popover>`
+          </Popover>
+        </template>
       );
 
       assert.dom('[data-test-id="content"]').doesNotExist();
@@ -54,7 +57,7 @@ module(
 
     test('it works with trigger hover mode, prevents focus restore', async function (assert) {
       await render(
-        hbs`
+        <template>
           <button type="button" data-test-id="focused-element">Button</button>
           <Popover as |p|>
             <button {{p.trigger "hover"}} {{p.anchor}} data-test-id="trigger">
@@ -66,7 +69,7 @@ module(
             >
               Content here
             </p.Content>
-          </Popover>`
+          </Popover></template>
       );
 
       (find('[data-test-id="focused-element"]') as HTMLButtonElement).focus();
@@ -97,7 +100,7 @@ module(
 
     test('it renders accessibility attributes', async function (assert) {
       await render(
-        hbs`
+        <template>
           <Popover as |p|>
             <button {{p.trigger}} {{p.anchor}} data-test-id="trigger">
               Trigger
@@ -108,7 +111,8 @@ module(
             >
               Content here
             </p.Content>
-          </Popover>`
+          </Popover>
+        </template>
       );
 
       assert.dom('[data-test-id="trigger"]').hasAria('haspopup', 'true');
@@ -122,56 +126,59 @@ module(
     });
 
     test('it shows backdrop when @backdrop=none', async function (assert) {
-      this.set('backdrop', 'none');
+      let backdrop = cell<'none' | 'faded'>('none');
 
       await render(
-        hbs`
+        <template>
           <Popover as |p|>
             <button {{p.trigger}} {{p.anchor}} data-test-id="trigger">
               Trigger
             </button>
 
             <p.Content
-              @backdrop={{this.backdrop}}
+              @backdrop={{backdrop.current}}
               @disableTransitions={{true}}
               data-test-id="content"
             >
               Content here
             </p.Content>
-          </Popover>`
+          </Popover>
+        </template>
       );
 
       await click('[data-test-id="trigger"]');
 
       assert.dom('.overlay__backdrop').doesNotExist();
 
-      this.set('backdrop', 'faded');
-
+      backdrop.current = 'faded';
+      await settled();
       assert.dom('.overlay__backdrop').exists();
     });
 
     test('clicking outside closes menu', async function (assert) {
       let calledClosed = false;
-      this.set('didClose', () => {
+
+      const didClose = () => {
         calledClosed = true;
-      });
+      };
 
       await render(
-        hbs`
+        <template>
           <div id="outside" tabindex="0"></div>
-          <Popover @didClose={{this.didClose}} as |p|>
+          <Popover @didClose={{didClose}} as |p|>
             <button {{p.trigger}} {{p.anchor}} data-test-id="trigger">
               Trigger
             </button>
 
             <p.Content
-              @backdrop={{this.backdrop}}
+              @backdrop="none"
               @disableTransitions={{true}}
               data-test-id="content"
             >
               Content here
             </p.Content>
-          </Popover>`
+          </Popover>
+        </template>
       );
 
       assert.dom('[data-test-id="content"]').doesNotExist();
@@ -191,68 +198,72 @@ module(
     });
 
     test('controlled isOpen', async function (assert) {
-      let isOpen = false;
-      this.set('isOpen', false);
-      this.set('onOpenChange', (value: boolean) => {
-        isOpen = value;
-        this.set('isOpen', value);
-      });
+      let isOpen = cell(false);
+
+      const onOpenChange = async (value: boolean) => {
+        isOpen.current =  value;
+        await settled();
+      };
 
       await render(
-        hbs`
+        <template>
           <div id="outside" tabindex="0"></div>
-          <Popover @isOpen={{this.isOpen}} @onOpenChange={{this.onOpenChange}} as |p|>
+          <Popover @isOpen={{isOpen.current}} @onOpenChange={{onOpenChange}} as |p|>
             <button {{p.trigger}} {{p.anchor}} data-test-id="trigger">
               Trigger
             </button>
 
             <p.Content
-              @backdrop={{this.backdrop}}
+              @backdrop="none"
               @disableTransitions={{true}}
               data-test-id="content"
             >
               Content here
             </p.Content>
-          </Popover>`
+          </Popover>
+        </template>
       );
 
       assert.dom('[data-test-id="content"]').doesNotExist();
       await click('[data-test-id="trigger"]');
       assert.dom('[data-test-id="content"]').exists();
-      assert.equal(isOpen, true);
+      assert.equal(isOpen.current, true);
 
       await click('#outside');
       assert.dom('[data-test-id="content"]').doesNotExist();
-      assert.equal(isOpen, false);
+      assert.equal(isOpen.current, false);
 
-      this.set('isOpen', true);
+      isOpen.current = true;
+      await settled();
       assert.dom('[data-test-id="content"]').exists();
 
-      this.set('isOpen', false);
+      isOpen.current = false;
+      await settled();
       assert.dom('[data-test-id="content"]').doesNotExist();
     });
 
     test('it prevents trigger event bubbling', async function (assert) {
       assert.expect(1);
 
-      this.set('parentClick', () => {
+      const parentClick = () => {
         assert.ok(false, 'popover trigger should not bubble click event');
-      });
+      };
 
       await render(
-        hbs`
+        <template>
           <Popover as |p|>
-            <button {{on "click" this.parentClick}}>
+            <button {{on "click" parentClick}}>
               <button {{p.trigger}} {{p.anchor}} data-test-id="trigger">
                 Trigger
               </button>
-<           </button>
+            </button>
             <p.Content
               data-test-id="content"
             >
               Content here
             </p.Content>
-          </Popover>`
+          </Popover>
+        </template>
       );
 
       await click('[data-test-id="trigger"]');
