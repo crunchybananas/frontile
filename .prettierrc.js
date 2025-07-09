@@ -1,14 +1,36 @@
-const defaults = require('@underline/eslint-config/.prettierrc.js');
+'use strict';
+
 module.exports = {
-  ...defaults,
+  printWidth: 100,
   plugins: ['prettier-plugin-ember-template-tag'],
   overrides: [
-    ...defaults.overrides,
     {
-      files: '*.{js,ts,gjs,gts}',
+      files: ['*.js', '*.ts', '*.cjs', '.mjs', '.cts', '.mts', '.cts'],
       options: {
-        templateSingleQuote: false
-      }
-    }
-  ]
+        singleQuote: true,
+        trailingComma: 'es5',
+      },
+    },
+    {
+      files: ['*.json'],
+      options: {
+        singleQuote: false,
+      },
+    },
+    {
+      files: ['*.hbs'],
+      options: {
+        singleQuote: false,
+      },
+    },
+    {
+      files: ['*.gjs', '*.gts'],
+      options: {
+        parser: 'ember-template-tag',
+        singleQuote: true,
+        templateSingleQuote: false,
+        trailingComma: 'es5',
+      },
+    },
+  ],
 };
