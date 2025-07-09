@@ -28,7 +28,6 @@
     "@embroider/test-setup": "^4.0.0",
     "@embroider/webpack": "^4.0.9",
     "@frontile/buttons": "workspace:0.17.0-beta.11",
-    "@frontile/changeset-form": "workspace:0.17.0-beta.10",
     "@frontile/collections": "workspace:0.17.0-beta.11",
     "@frontile/forms": "workspace:0.17.0-beta.11",
     "@frontile/forms-legacy": "workspace:0.17.0-beta.10",
@@ -92,7 +91,6 @@
     "edition": "octane"
   },
   "dependencies": {
-    "@types/qunit": "^2.19.12",
-    "ember-changeset": "^4.1.2"
+    "@types/qunit": "^2.19.12"
   }
 }

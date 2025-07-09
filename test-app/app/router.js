@@ -10,7 +10,6 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   this.route('buttons');
-  this.route('changeset-form');
   this.route('core');
   this.route('forms', function () {
     this.route('style-variants');

@@ -32,7 +32,6 @@ module.exports = {
 
     ...[
       'buttons',
-      'changeset-form',
       'utilities',
       'status',
       'collections',
@@ -62,6 +61,5 @@ module.exports = {
     notifications: 'Notifications',
     forms: 'Forms',
     'forms-legacy': 'Forms (Legacy)',
-    'changeset-form': 'Changeset Form'
   }
 };

@@ -22,7 +22,6 @@ still pre-version 1.0.0, so breaking changes can still occur.
 - `@frontile/overlays`: Components to render content over the UI, like Modal Dialogs.
 - `@frontile/notifications`: Package that provides toast-like notifications.
 - `@frontile/forms`: Components for working with forms.
-- `@frontile/changeset-form`: Integration between the Forms package and [Changeset](https://github.com/poteto/ember-changeset).
 - `@frontile/utilities`: Utility components.
 - `@frontile/status`: Components like progress bar.
 - `@frontile/theme`: Theming capabilities using [Tailwind Variants](https://www.tailwind-variants.org/).
