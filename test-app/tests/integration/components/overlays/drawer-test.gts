@@ -1,9 +1,32 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find, click, triggerKeyEvent } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { render, find, click, triggerKeyEvent, settled } from '@ember/test-helpers';
 import { registerCustomStyles } from '@frontile/theme';
 import { tv } from 'tailwind-variants';
+import { Drawer } from '@frontile/overlays';
+import { cell } from 'ember-resources';
+
+const DrawerTemplate = <template>
+  <Drawer
+    @isOpen={{@isOpen}}
+    @onClose={{@onClose}}
+    @onOpen={{@onOpen}}
+    @size={{@size}}
+    @placement={{@placement}}
+    @allowClosing={{@allowClosing}}
+    @renderInPlace={{@renderInPlace}}
+    @disableTransitions={{true}}
+    @closeOnOutsideClick={{@closeOnOutsideClick}}
+    @closeOnEscapeKey={{@closeOnEscapeKey}}
+    @allowCloseButton={{@allowCloseButton}}
+    data-test-id="drawer"
+    as |m|
+  >
+    <m.Header>My Header</m.Header>
+    <m.Body>My Content</m.Body>
+    <m.Footer>My Footer</m.Footer>
+  </Drawer>
+</template>;
 
 module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   setupRenderingTest(hooks);
@@ -14,9 +37,9 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
       base: 'overlay__content',
       variants: {
         inPlace: {
-          true: 'overlay--in-place'
-        }
-      }
+          true: 'overlay--in-place',
+        },
+      },
     }) as never,
     drawer: tv({
       slots: {
@@ -24,7 +47,7 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
         closeButton: 'drawer__close-btn',
         header: 'drawer__header',
         body: 'drawer__body',
-        footer: 'drawer__footer'
+        footer: 'drawer__footer',
       },
       variants: {
         size: {
@@ -33,108 +56,87 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
           md: '',
           lg: '',
           xl: '',
-          full: ''
+          full: '',
         },
         placement: {
           top: 'drawer--top',
           bottom: 'drawer--bottom',
           left: 'drawer--left',
-          right: 'drawer--right'
-        }
+          right: 'drawer--right',
+        },
       },
       compoundVariants: [
         // vertical
         {
           placement: ['top', 'bottom'],
           size: 'xs',
-          class: 'drawer--xs-vertical'
+          class: 'drawer--xs-vertical',
         },
         {
           placement: ['top', 'bottom'],
           size: 'sm',
-          class: 'drawer--sm-vertical'
+          class: 'drawer--sm-vertical',
         },
         {
           placement: ['top', 'bottom'],
           size: 'md',
-          class: 'drawer--md-vertical'
+          class: 'drawer--md-vertical',
         },
         {
           placement: ['top', 'bottom'],
           size: 'lg',
-          class: 'drawer--lg-vertical'
+          class: 'drawer--lg-vertical',
         },
         {
           placement: ['top', 'bottom'],
           size: 'xl',
-          class: 'drawer--xl-vertical'
+          class: 'drawer--xl-vertical',
         },
         {
           placement: ['top', 'bottom'],
           size: 'full',
-          class: 'drawer--full-vertical'
+          class: 'drawer--full-vertical',
         },
 
         // horizontal
         {
           placement: ['right', 'left'],
           size: 'xs',
-          class: 'drawer--xs-horizontal'
+          class: 'drawer--xs-horizontal',
         },
         {
           placement: ['right', 'left'],
           size: 'sm',
-          class: 'drawer--sm-horizontal'
+          class: 'drawer--sm-horizontal',
         },
         {
           placement: ['right', 'left'],
           size: 'md',
-          class: 'drawer--md-horizontal'
+          class: 'drawer--md-horizontal',
         },
         {
           placement: ['right', 'left'],
           size: 'lg',
-          class: 'drawer--lg-horizontal'
+          class: 'drawer--lg-horizontal',
         },
         {
           placement: ['right', 'left'],
           size: 'xl',
-          class: 'drawer--xl-horizontal'
+          class: 'drawer--xl-horizontal',
         },
         {
           placement: ['right', 'left'],
           size: 'full',
-          class: 'drawer--full-horizontal'
-        }
-      ]
-    })
+          class: 'drawer--full-horizontal',
+        },
+      ],
+    }),
   });
 
-  const template = hbs`
-    <Drawer
-      @isOpen={{this.isOpen}}
-      @onClose={{this.onClose}}
-      @onOpen={{this.onOpen}}
-      @size={{this.size}}
-      @placement={{this.placement}}
-      @allowClosing={{this.allowClosing}}
-      @renderInPlace={{this.renderInPlace}}
-      @disableTransitions={{true}}
-      @closeOnOutsideClick={{this.closeOnOutsideClick}}
-      @closeOnEscapeKey={{this.closeOnEscapeKey}}
-      @allowCloseButton={{this.allowCloseButton}}
-      data-test-id="drawer"
-      as |m|
-    >
-      <m.Header>My Header</m.Header>
-      <m.Body>My Content</m.Body>
-      <m.Footer>My Footer</m.Footer>
-    </Drawer>
-  `;
-
   test('it renders, header, body, footer, and close-btn', async function (assert) {
-    this.set('isOpen', true);
-    await render(template);
+    const isOpen = cell(true);
+
+    await render(<template><DrawerTemplate @isOpen={{isOpen.current}} /></template>);
 
     assert.dom('[data-test-id="drawer"]').exists();
     assert.dom('[data-test-id="drawer"] .drawer__header').hasText('My Header');
@@ -144,76 +146,99 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   });
 
   test('it renders accessibility attributes', async function (assert) {
-    this.set('isOpen', true);
-    await render(template);
+    await render(<template><DrawerTemplate @isOpen={{true}} /></template>);
 
     assert.dom('[data-test-id="drawer"]').hasAttribute('tabindex', '0');
     assert.dom('[data-test-id="drawer"]').hasAttribute('role', 'dialog');
     assert.dom('[data-test-id="drawer"]').hasAttribute('aria-labelledby');
 
-    const ariaLablledBy =
-      find('[data-test-id="drawer"]')?.getAttribute('aria-labelledby') || '';
-    assert
-      .dom('[data-test-id="drawer"] .drawer__header')
-      .hasAttribute('id', ariaLablledBy);
+    const ariaLablledBy = find('[data-test-id="drawer"]')?.getAttribute('aria-labelledby') || '';
+    assert.dom('[data-test-id="drawer"] .drawer__header').hasAttribute('id', ariaLablledBy);
   });
 
   test('it adds modifier class for size', async function (assert) {
-    this.set('isOpen', true);
-    await render(template);
+    const size = cell<'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'>('md');
+    const placement = cell<'top' | 'bottom' | 'left' | 'right'>('right');
+
+    await render(
+      <template>
+        <DrawerTemplate @isOpen={{true}} @size={{size.current}} @placement={{placement.current}} />
+      </template>
+    );
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--md-horizontal');
 
-    this.set('size', 'xs');
+    size.current = 'xs';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--xs-horizontal');
 
-    this.set('size', 'sm');
+    size.current = 'sm';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--sm-horizontal');
 
-    this.set('size', 'md');
+    size.current = 'md';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--md-horizontal');
 
-    this.set('size', 'lg');
+    size.current = 'lg';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--lg-horizontal');
 
-    this.set('size', 'xl');
+    size.current = 'xl';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--xl-horizontal');
 
-    this.set('size', 'full');
+    size.current = 'full';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--full-horizontal');
 
-    this.set('placement', 'top');
-    this.set('size', 'lg');
+    placement.current = 'top';
+    size.current = 'lg';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--lg-vertical');
   });
 
   test('it adds modifier class for placement', async function (assert) {
-    this.set('isOpen', true);
+    const placement = cell<'top' | 'bottom' | 'left' | 'right'>('right');
 
-    await render(template);
+    await render(
+      <template><DrawerTemplate @isOpen={{true}} @placement={{placement.current}} /></template>
+    );
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--right');
 
-    this.set('placement', 'top');
+    placement.current = 'top';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--top');
 
-    this.set('placement', 'bottom');
+    placement.current = 'bottom';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--bottom');
 
-    this.set('placement', 'left');
+    placement.current = 'left';
+    await settled();
     assert.dom('[data-test-id="drawer"]').hasClass('drawer--left');
   });
 
   test('it closes drawer when close button is clicked', async function (assert) {
     assert.expect(3);
 
-    this.set('disableTransitions', true);
-    this.set('isOpen', true);
+    const isOpen = cell(true);
 
-    this.set('onClose', () => {
+    const onClose = async () => {
       assert.ok(true);
-      this.set('isOpen', false);
-    });
+      isOpen.current = false;
+      await settled();
+    };
 
-    await render(template);
+    await render(
+      <template>
+        <DrawerTemplate
+          @disableTransitions={{true}}
+          @isOpen={{isOpen.current}}
+          @onClose={{onClose}}
+          @allowCloseButton={{true}}
+        />
+      </template>
+    );
 
     assert.dom('[data-test-id="drawer"]').exists();
 
@@ -222,15 +247,23 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   });
 
   test('it does not render close button when @allowCloseButton=false', async function (assert) {
-    this.set('disableTransitions', true);
-    this.set('isOpen', true);
-    this.set('allowCloseButton', false);
+    const isOpen = cell(true);
 
-    this.set('onClose', () => {
-      this.set('isOpen', false);
-    });
+    const onClose = async () => {
+      isOpen.current = false;
+      await settled();
+    };
 
-    await render(template);
+    await render(
+      <template>
+        <DrawerTemplate
+          @disableTransitions={{true}}
+          @isOpen={{isOpen}}
+          @allowCloseButton={{false}}
+          @onClose={{onClose}}
+        />
+      </template>
+    );
 
     assert.dom('[data-test-id="drawer"]').exists();
     assert.dom('[data-test-id="drawer"] .drawer__close-btn').doesNotExist();
@@ -239,15 +272,23 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   test('it closes drawer when backdrop is clicked', async function (assert) {
     assert.expect(3);
 
-    this.set('disableTransitions', true);
-    this.set('isOpen', true);
+    const isOpen = cell(true);
 
-    this.set('onClose', () => {
+    const onClose = async () => {
       assert.ok(true);
-      this.set('isOpen', false);
-    });
+      isOpen.current = false;
+      await settled();
+    };
 
-    await render(template);
+    await render(
+      <template>
+        <DrawerTemplate
+          @disableTransitions={{true}}
+          @isOpen={{isOpen.current}}
+          @onClose={{onClose}}
+        />
+      </template>
+    );
 
     assert.dom('[data-test-id="drawer"]').exists();
     await click('.overlay__backdrop');
@@ -257,15 +298,24 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   test('when @closeOnOutsideClick={{false}} does not close drawer', async function (assert) {
     assert.expect(1);
 
-    this.set('closeOnOutsideClick', false);
-    this.set('isOpen', true);
+    const isOpen = cell(true);
 
-    this.set('onClose', () => {
+    const onClose = async () => {
       assert.ok(false, 'should not have been called');
-      this.set('isOpen', false);
-    });
+      isOpen.current = false;
+      await settled();
+    };
 
-    await render(template);
+    await render(
+      <template>
+        <DrawerTemplate
+          @closeOnOutsideClick={{false}}
+          @isOpen={{isOpen.current}}
+          @onClose={{onClose}}
+        />
+      </template>
+    );
+
     await click('.overlay__backdrop');
     assert.dom('[data-test-id="drawer"]').exists();
   });
@@ -273,14 +323,18 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   test('it closes drawer when pressing Escape', async function (assert) {
     assert.expect(2);
 
-    this.set('isOpen', true);
+    const isOpen = cell(true);
 
-    this.set('onClose', () => {
+    const onClose = async () => {
       assert.ok(true);
-      this.set('isOpen', false);
-    });
+      isOpen.current = false;
+      await settled();
+    };
 
-    await render(template);
+    await render(
+      <template><DrawerTemplate @isOpen={{isOpen.current}} @onClose={{onClose}} /></template>
+    );
+
     await triggerKeyEvent('.overlay__content', 'keydown', 'Escape');
     assert.dom('[data-test-id="drawer"]').doesNotExist();
   });
@@ -288,15 +342,24 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   test('when @closeOnEscapeKey={{false}} does not close drawer', async function (assert) {
     assert.expect(1);
 
-    this.set('closeOnEscapeKey', false);
-    this.set('isOpen', true);
+    const closeOnEscapeKey = cell(false);
+    const isOpen = cell(true);
 
-    this.set('onClose', () => {
+    const onClose = async () => {
       assert.ok(false, 'should not have been called');
-      this.set('isOpen', false);
-    });
+      isOpen.current = false;
+      await settled();
+    };
 
-    await render(template);
+    await render(
+      <template>
+        <DrawerTemplate
+          @closeOnEscapeKey={{closeOnEscapeKey}}
+          @isOpen={{isOpen.current}}
+          @onClose={{onClose}}
+        />
+      </template>
+    );
     await triggerKeyEvent(document as never, 'keydown', 'Escape');
     assert.dom('[data-test-id="drawer"]').exists();
   });
@@ -304,15 +367,19 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   test('when @allowClosing={{false}} does not close drawer', async function (assert) {
     assert.expect(4);
 
-    this.set('allowClosing', false);
-    this.set('isOpen', true);
+    const isOpen = cell(true);
 
-    this.set('onClose', () => {
+    const onClose = async () => {
       assert.ok(false, 'should not have been called');
-      this.set('isOpen', false);
-    });
+      isOpen.current = false;
+      await settled();
+    };
 
-    await render(template);
+    await render(
+      <template>
+        <DrawerTemplate @allowClosing={{false}} @isOpen={{isOpen.current}} @onClose={{onClose}} />
+      </template>
+    );
 
     assert.dom('[data-test-id="drawer"]').exists();
     assert.dom('[data-test-id="drawer"] .drawer__close-btn').doesNotExist();
@@ -325,10 +392,12 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
   });
 
   test('when @renderInPlace={{true}} renders in place', async function (assert) {
-    this.set('renderInPlace', true);
-    this.set('isOpen', true);
+    const renderInPlace = cell(true);
+    const isOpen = cell(true);
 
-    await render(template);
+    await render(
+      <template><DrawerTemplate @renderInPlace={{renderInPlace}} @isOpen={{isOpen}} /></template>
+    );
     assert.dom('[data-portal-target] > [data-test-id="drawer"]').doesNotExist();
     // @ts-ignore
     assert.dom('[data-test-id="drawer"]', this.element).exists();
@@ -336,10 +405,10 @@ module('Integration | Component | @frontile/overlays/Drawer', function (hooks) {
 
   test('it executes onOpen when drawer is opened', async function (assert) {
     assert.expect(1);
-    this.set('isOpen', true);
-    this.set('onOpen', () => {
+    const isOpen = cell(true);
+    const onOpen = () => {
       assert.ok(true);
-    });
-    await render(template);
+    };
+    await render(<template><DrawerTemplate @isOpen={{isOpen}} @onOpen={{onOpen}} /></template>);
   });
 });
