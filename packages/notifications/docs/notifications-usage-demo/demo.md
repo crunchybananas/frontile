@@ -58,19 +58,6 @@ order: 1
     @value={{this.options.duration}}
     @onInput={{fn this.setValue "duration"}}
   />
-
-  <FormSelect
-    @containerClass="w-64"
-    @hint="Allow users to take an action on a notification"
-    @label="Custom Actions"
-    @options={{this.customActions}}
-    @isMultiple={{true}}
-    @selected={{this.options.customActions}}
-    @onChange={{fn this.setValue "customActions"}}
-    as |action|
-  >
-    {{action.label}}
-  </FormSelect>
 </div>
 
 <button

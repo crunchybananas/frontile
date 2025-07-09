@@ -54,7 +54,6 @@ module.exports = {
 
     { pattern: /^not-prose/ },
     { pattern: /^prose"/ },
-    { pattern: /^dark:prose-invert"/ },
-    { pattern: /^ember-power-select/ }
+    { pattern: /^dark:prose-invert"/ }
   ]
 };
