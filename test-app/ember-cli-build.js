@@ -15,8 +15,7 @@ module.exports = function (defaults) {
         '@frontile/notifications',
         '@frontile/overlays',
         '@frontile/forms',
-        '@frontile/changeset-form',
-        ['@frontile/forms', '@frontile/changeset-form']
+        ['@frontile/forms']
       ]
     },
     postcssOptions: {

@@ -11,7 +11,7 @@ Component Library for Ember Octane apps: Core
 ## Installation
 
 ```sh
-ember install @frontile/changeset-form
+ember install @frontile/forms
 ```
 
 ## Documentation

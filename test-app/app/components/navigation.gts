@@ -19,13 +19,6 @@ const Navigation: TOC<{ Element: HTMLDivElement }> = <template>
         Buttons
       </LinkTo>
       <LinkTo
-        @route="changeset-form"
-        @activeClass="border-primary border-b-4"
-        class="px-2 py-2"
-      >
-        Changeset Form
-      </LinkTo>
-      <LinkTo
         @route="core"
         @activeClass="border-primary border-b-4"
         class="px-2 py-2"
