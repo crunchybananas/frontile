@@ -100,18 +100,11 @@ module('Integration | @frontile/utilities/ref', function (hooks) {
     await render(<template><MyTestComponentWithCallback /></template>);
 
     // Initially, no element is rendered, so the callback should not have been called yet.
-    assert.strictEqual(
-      lastElement,
-      undefined,
-      'Initial state: no element present'
-    );
+    assert.strictEqual(lastElement, undefined, 'Initial state: no element present');
 
     // Toggle on: the element is rendered.
     await click('[data-test-id="toggle"]');
-    assert.ok(
-      lastElement,
-      'Callback was called with an element when toggled on'
-    );
+    assert.ok(lastElement, 'Callback was called with an element when toggled on');
     assert.equal(lastElement!.tagName, 'DIV', 'The element is a DIV');
     assert.ok(callbackCalls > 0, 'onChange callback was called at least once');
 

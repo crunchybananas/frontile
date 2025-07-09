@@ -96,7 +96,7 @@ module('Integration | Component | @frontile/forms-legacy/FormTextarea', function
   });
 
   test('do not show error messages if errors has no elements', async function (assert) {
-    const errors = []
+    const errors = [];
     await render(
       <template>
         <div class="my-container">

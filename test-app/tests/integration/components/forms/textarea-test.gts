@@ -16,20 +16,14 @@ module('Integration | Component | @frontile/forms/Textarea', function (hooks) {
   });
 
   test('it renders html attributes', async function (assert) {
-    await render(
-      <template>
-        <Textarea @label="Name" @name="some-name" data-test-input />
-      </template>
-    );
+    await render(<template><Textarea @label="Name" @name="some-name" data-test-input /></template>);
 
     assert.dom('[data-test-input]').exists();
     assert.dom('[name="some-name"]').exists();
   });
 
   test('it should have id attr with matching label attr `for`', async function (assert) {
-    await render(
-      <template><Textarea @label="Name" data-test-input /></template>
-    );
+    await render(<template><Textarea @label="Name" data-test-input /></template>);
 
     const el = find('[data-test-input]') as HTMLInputElement;
     const id = el.getAttribute('id') || '';
@@ -56,11 +50,7 @@ module('Integration | Component | @frontile/forms/Textarea', function (hooks) {
 
     assert.dom('[data-test-input]').hasValue('Josemar');
     await fillIn('[data-test-input]', 'Sam');
-    assert.equal(
-      myTextareaValue.current,
-      'Sam',
-      'should have mutated the value'
-    );
+    assert.equal(myTextareaValue.current, 'Sam', 'should have mutated the value');
   });
 
   test('show error messages when errors has items', async function (assert) {
@@ -79,9 +69,7 @@ module('Integration | Component | @frontile/forms/Textarea', function (hooks) {
     await settled();
 
     assert.dom('[data-test-input]').hasAttribute('aria-invalid');
-    assert
-      .dom('[data-component="form-feedback"]')
-      .hasText('This field is required');
+    assert.dom('[data-component="form-feedback"]').hasText('This field is required');
   });
 
   test('do not show error messages if errors has no elements', async function (assert) {
@@ -108,9 +96,7 @@ module('Integration | Component | @frontile/forms/Textarea', function (hooks) {
     };
 
     await render(
-      <template>
-        <Textarea data-test-input @onInput={{onInput}} @onChange={{onChange}} />
-      </template>
+      <template><Textarea data-test-input @onInput={{onInput}} @onChange={{onChange}} /></template>
     );
 
     await fillIn('[data-test-input]', 'Josemar');
@@ -121,7 +107,7 @@ module('Integration | Component | @frontile/forms/Textarea', function (hooks) {
   test('it add classes to all slots', async function (assert) {
     const classes = {
       base: 'my-base-class',
-      input: 'my-input-class'
+      input: 'my-input-class',
     };
     await render(<template><Textarea @classes={{classes}} /></template>);
 

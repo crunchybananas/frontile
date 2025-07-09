@@ -11,38 +11,38 @@ registerCustomStyles({
       base: ['chip'],
       content: ['chip-content'],
       dot: ['chip-dot'],
-      closeButton: ['chip-close-button']
+      closeButton: ['chip-close-button'],
     },
     variants: {
       appearance: {
         default: 'chip-default',
         outlined: 'chip-outlined',
-        faded: 'chip-faded'
+        faded: 'chip-faded',
       },
       intent: {
         default: 'intent-default',
         primary: 'intent-primary',
         success: 'intent-success',
         warning: 'intent-warning',
-        danger: 'intent-danger'
+        danger: 'intent-danger',
       },
       size: {
         sm: 'chip-sm',
         md: 'chip-md',
-        lg: 'chip-lg'
+        lg: 'chip-lg',
       },
       radius: {
         none: 'radius-none',
         sm: 'radius-sm',
         lg: 'radius-lg',
-        full: 'radius-full'
-      }
+        full: 'radius-full',
+      },
     },
     defaultVariants: {
       size: 'md',
-      intent: 'primary'
-    }
-  }) as never
+      intent: 'primary',
+    },
+  }) as never,
 });
 
 module('Integration | Component | Chip | @frontile/buttons', function (hooks) {

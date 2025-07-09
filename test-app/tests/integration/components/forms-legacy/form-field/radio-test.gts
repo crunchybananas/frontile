@@ -43,9 +43,7 @@ module('Integration | Component | @frontile/forms-legacy/FormField::Radio', func
     const value = cell(false);
 
     await render(
-      <template>
-        <Radio data-test-radio @checked={{true}} @value={{value.current}} />
-      </template>
+      <template><Radio data-test-radio @checked={{true}} @value={{value.current}} /></template>
     );
 
     assert.dom('[data-test-radio]').isNotChecked();

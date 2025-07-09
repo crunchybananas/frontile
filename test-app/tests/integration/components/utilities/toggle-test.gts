@@ -19,10 +19,7 @@ class MyTestComponent extends Component {
       </div>
     {{/if}}
 
-    <button
-      data-test-id="button-toggle"
-      {{on "click" this.showingState.toggle}}
-    >
+    <button data-test-id="button-toggle" {{on "click" this.showingState.toggle}}>
       Toggle
     </button>
 

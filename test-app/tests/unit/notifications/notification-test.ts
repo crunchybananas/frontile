@@ -28,9 +28,9 @@ module('Unit | @frontile/notifications/Notification', function (hooks) {
           label: 'Label',
           onClick: () => {
             /* test */
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     assert.equal(notification.message, 'Message');

@@ -22,21 +22,13 @@ module('Integration | Component | @frontile/forms/Input', function (hooks) {
   });
 
   test('it should allow to change the input type', async function (assert) {
-    await render(
-      <template>
-        <Input @label="Name" @type="number" data-test-input />
-      </template>
-    );
+    await render(<template><Input @label="Name" @type="number" data-test-input /></template>);
 
     assert.dom('[data-test-input]').hasAttribute('type', 'number');
   });
 
   test('it renders html attributes', async function (assert) {
-    await render(
-      <template>
-        <Input @label="Name" @name="some-name" data-test-input />
-      </template>
-    );
+    await render(<template><Input @label="Name" @name="some-name" data-test-input /></template>);
 
     assert.dom('[data-test-input]').exists();
     assert.dom('[name="some-name"]').exists();
@@ -101,24 +93,16 @@ module('Integration | Component | @frontile/forms/Input', function (hooks) {
     );
 
     assert.dom('[data-component="input"]').exists();
-    assert
-      .dom('[data-test-id="input-start-content"]')
-      .hasClass(/pointer-events-none/);
-    assert
-      .dom('[data-test-id="input-end-content"]')
-      .hasClass(/pointer-events-none/);
+    assert.dom('[data-test-id="input-start-content"]').hasClass(/pointer-events-none/);
+    assert.dom('[data-test-id="input-end-content"]').hasClass(/pointer-events-none/);
 
     startContentPointerEvents.current = 'auto';
     endContentPointerEvents.current = 'auto';
     await settled();
 
     assert.dom('[data-component="input"]').exists();
-    assert
-      .dom('[data-test-id="input-start-content"]')
-      .hasClass(/pointer-events-auto/);
-    assert
-      .dom('[data-test-id="input-end-content"]')
-      .hasClass(/pointer-events-auto/);
+    assert.dom('[data-test-id="input-start-content"]').hasClass(/pointer-events-auto/);
+    assert.dom('[data-test-id="input-end-content"]').hasClass(/pointer-events-auto/);
   });
 
   test('should mutate the value using onInput action', async function (assert) {
@@ -157,9 +141,7 @@ module('Integration | Component | @frontile/forms/Input', function (hooks) {
     await settled();
 
     assert.dom('[data-test-input]').hasAttribute('aria-invalid');
-    assert
-      .dom('[data-component="form-feedback"]')
-      .hasText('This field is required');
+    assert.dom('[data-component="form-feedback"]').hasText('This field is required');
   });
 
   test('do not show error messages if errors has no elements', async function (assert) {
@@ -186,9 +168,7 @@ module('Integration | Component | @frontile/forms/Input', function (hooks) {
     };
 
     await render(
-      <template>
-        <Input data-test-input @onInput={{onInput}} @onChange={{onChange}} />
-      </template>
+      <template><Input data-test-input @onInput={{onInput}} @onChange={{onChange}} /></template>
     );
 
     await fillIn('[data-test-input]', 'Josemar');
@@ -199,7 +179,7 @@ module('Integration | Component | @frontile/forms/Input', function (hooks) {
   test('it add classes to all slots', async function (assert) {
     const classes = {
       base: 'my-base-class',
-      input: 'my-input-class'
+      input: 'my-input-class',
     };
     await render(<template><Input @classes={{classes}} /></template>);
 
