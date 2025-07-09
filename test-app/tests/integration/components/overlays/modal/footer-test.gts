@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import Footer from "@frontile/overlays/components/modal/footer";
 
 module(
   'Integration | Component | @frontile/overlays/Modal::Footer',
@@ -9,11 +9,11 @@ module(
     setupRenderingTest(hooks);
 
     test('it renders, content and html attributes', async function (assert) {
-      await render(hbs`
-      <Modal::Footer data-test-id="footer" class="other-class">
+      await render(<template>
+      <Footer data-test-id="footer" class="other-class">
         My Footer
-      </Modal::Footer>
-    `);
+      </Footer>
+    </template>);
 
       assert.dom('[data-test-id="footer"]').hasText('My Footer');
       assert.dom('[data-test-id="footer"]').hasClass('other-class');
