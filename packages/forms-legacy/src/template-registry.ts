@@ -27,6 +27,5 @@ export default interface Registry {
   FormInput: typeof FormInput;
   FormRadioGroup: typeof FormRadioGroup;
   FormRadio: typeof FormRadio;
-  FormSelect: typeof FormSelect;
   FormTextarea: typeof FormTextarea;
 }
