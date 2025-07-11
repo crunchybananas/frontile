@@ -47,7 +47,9 @@ module('Integration | Component | @frontile/forms-legacy/FormInput', function (h
   test('show value on input, does not mutate value by default', async function (assert) {
     const myInputValue = cell('Josemar');
     await render(
-      <template><FormInput data-test-input @label="Name" @value={{myInputValue.current}} /></template>
+      <template>
+        <FormInput data-test-input @label="Name" @value={{myInputValue.current}} />
+      </template>
     );
 
     assert.dom('[data-test-input]').hasValue('Josemar');

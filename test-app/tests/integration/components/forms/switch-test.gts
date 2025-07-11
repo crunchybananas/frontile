@@ -16,11 +16,7 @@ module('Integration | Component | @frontile/forms/Switch', function (hooks) {
   });
 
   test('it renders html attributes', async function (assert) {
-    await render(
-      <template>
-        <Switch @label="Name" @name="some-name" data-test-input />
-      </template>
-    );
+    await render(<template><Switch @label="Name" @name="some-name" data-test-input /></template>);
 
     assert.dom('[data-test-input]').exists();
     assert.dom('[name="some-name"]').exists();
@@ -60,11 +56,7 @@ module('Integration | Component | @frontile/forms/Switch', function (hooks) {
 
     await click('[data-test-input]');
     assert.dom('[data-test-input]').isNotChecked();
-    assert.equal(
-      mySwitchValue.current,
-      false,
-      'should have mutated the value again'
-    );
+    assert.equal(mySwitchValue.current, false, 'should have mutated the value again');
   });
 
   test('should mutate the value using onChange action (uncontrolled)', async function (assert) {
@@ -73,12 +65,7 @@ module('Integration | Component | @frontile/forms/Switch', function (hooks) {
 
     await render(
       <template>
-        <Switch
-          data-test-input
-          @label="Name"
-          @defaultSelected={{true}}
-          @onChange={{updateValue}}
-        />
+        <Switch data-test-input @label="Name" @defaultSelected={{true}} @onChange={{updateValue}} />
       </template>
     );
 
@@ -107,26 +94,18 @@ module('Integration | Component | @frontile/forms/Switch', function (hooks) {
     );
 
     assert.dom('[data-test-input]').isChecked();
-    assert
-      .dom('[data-component="switch"]')
-      .hasAttribute('data-selected', 'true');
-    assert
-      .dom('[data-component="switch"]')
-      .hasAttribute('data-disabled', 'false');
+    assert.dom('[data-component="switch"]').hasAttribute('data-selected', 'true');
+    assert.dom('[data-component="switch"]').hasAttribute('data-disabled', 'false');
 
     await click('[data-test-input]');
 
     assert.dom('[data-test-input]').isNotChecked();
-    assert
-      .dom('[data-component="switch"]')
-      .hasAttribute('data-selected', 'false');
+    assert.dom('[data-component="switch"]').hasAttribute('data-selected', 'false');
 
     disabled.current = true;
     await settled();
 
-    assert
-      .dom('[data-component="switch"]')
-      .hasAttribute('data-disabled', 'true');
+    assert.dom('[data-component="switch"]').hasAttribute('data-disabled', 'true');
   });
 
   test('it renders content blocks', async function (assert) {
@@ -164,9 +143,7 @@ module('Integration | Component | @frontile/forms/Switch', function (hooks) {
     await settled();
 
     assert.dom('[data-test-input]').hasAttribute('aria-invalid');
-    assert
-      .dom('[data-component="form-feedback"]')
-      .hasText('This field is required');
+    assert.dom('[data-component="form-feedback"]').hasText('This field is required');
   });
 
   test('do not show error messages if errors has no elements', async function (assert) {
@@ -190,7 +167,7 @@ module('Integration | Component | @frontile/forms/Switch', function (hooks) {
       hiddenInput: 'my-hidden-input-class',
       startContent: 'my-start-content-class',
       endContent: 'my-end-content-class',
-      label: 'my-label-class'
+      label: 'my-label-class',
     };
     await render(
       <template>

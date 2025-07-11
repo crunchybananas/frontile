@@ -35,23 +35,13 @@ module('Integration | Component | @frontile/overlays/Portal', function (hooks) {
 
     const portal1 = find('[data-test-id="portal-1"]');
 
-    const portal1Nested = portal1?.querySelector(
-      '[data-test-id="portal-1-nested"]'
-    );
+    const portal1Nested = portal1?.querySelector('[data-test-id="portal-1-nested"]');
 
-    assert.ok(
-      portal1Nested,
-      'should have found a nested portal inside of portal-1'
-    );
+    assert.ok(portal1Nested, 'should have found a nested portal inside of portal-1');
 
-    const portal1NestedNested = portal1?.querySelector(
-      '[data-test-id="portal-1-nested-nested"]'
-    );
+    const portal1NestedNested = portal1?.querySelector('[data-test-id="portal-1-nested-nested"]');
 
-    assert.ok(
-      portal1NestedNested,
-      'should have found a nested portal inside of portal-1-nested'
-    );
+    assert.ok(portal1NestedNested, 'should have found a nested portal inside of portal-1-nested');
 
     const portal2 = portal1?.querySelector('[data-test-id="portal-2"]');
     assert.notOk(portal2, 'should have not found portal-2 inside of portal-1');
@@ -104,10 +94,7 @@ module('Integration | Component | @frontile/overlays/Portal', function (hooks) {
         <Portal data-test-id="portal-1">
           First portal
 
-          <Portal
-            data-test-id="portal-1-not-nested"
-            @appendToParentPortal={{false}}
-          >
+          <Portal data-test-id="portal-1-not-nested" @appendToParentPortal={{false}}>
             Second portal
           </Portal>
         </Portal>
@@ -120,14 +107,9 @@ module('Integration | Component | @frontile/overlays/Portal', function (hooks) {
 
     const portal1 = find('[data-test-id="portal-1"]');
 
-    const portal1NotNested = portal1?.querySelector(
-      '[data-test-id="portal-1-not-nested"]'
-    );
+    const portal1NotNested = portal1?.querySelector('[data-test-id="portal-1-not-nested"]');
 
-    assert.notOk(
-      portal1NotNested,
-      'should have not found nested portal inside of portal-1'
-    );
+    assert.notOk(portal1NotNested, 'should have not found nested portal inside of portal-1');
   });
 
   test('it renders inline when argument is passed in', async function (assert) {

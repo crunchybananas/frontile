@@ -14,9 +14,9 @@ module('Integration | Component | @frontile/overlays/modal', function (hooks) {
       base: 'overlay__content',
       variants: {
         inPlace: {
-          true: 'overlay--in-place'
-        }
-      }
+          true: 'overlay--in-place',
+        },
+      },
     }) as never,
     modal: tv({
       slots: {
@@ -24,7 +24,7 @@ module('Integration | Component | @frontile/overlays/modal', function (hooks) {
         closeButton: 'modal__close-btn',
         header: 'modal__header',
         body: 'modal__body',
-        footer: 'modal__footer'
+        footer: 'modal__footer',
       },
       variants: {
         size: {
@@ -33,13 +33,13 @@ module('Integration | Component | @frontile/overlays/modal', function (hooks) {
           md: 'modal--md',
           lg: 'modal--lg',
           xl: 'modal--xl',
-          full: 'modal--full'
+          full: 'modal--full',
         },
         isCentered: {
-          true: 'modal--centered'
-        }
-      }
-    }) as never
+          true: 'modal--centered',
+        },
+      },
+    }) as never,
   });
 
   const template = hbs`
@@ -83,11 +83,8 @@ module('Integration | Component | @frontile/overlays/modal', function (hooks) {
     assert.dom('[data-test-id="modal"]').hasAttribute('role', 'dialog');
     assert.dom('[data-test-id="modal"]').hasAttribute('aria-labelledby');
 
-    const ariaLablledBy =
-      find('[data-test-id="modal"]')?.getAttribute('aria-labelledby') || '';
-    assert
-      .dom('[data-test-id="modal"] .modal__header')
-      .hasAttribute('id', ariaLablledBy);
+    const ariaLablledBy = find('[data-test-id="modal"]')?.getAttribute('aria-labelledby') || '';
+    assert.dom('[data-test-id="modal"] .modal__header').hasAttribute('id', ariaLablledBy);
   });
 
   test('it adds modifier class if @isCentered is set to true', async function (assert) {
@@ -201,11 +198,7 @@ module('Integration | Component | @frontile/overlays/modal', function (hooks) {
     });
 
     await render(template);
-    await triggerKeyEvent(
-      find('.overlay__content') as Element,
-      'keydown',
-      'Escape'
-    );
+    await triggerKeyEvent(find('.overlay__content') as Element, 'keydown', 'Escape');
     assert.dom('[data-test-id="modal"]').doesNotExist();
   });
 

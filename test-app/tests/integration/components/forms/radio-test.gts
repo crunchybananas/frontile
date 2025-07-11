@@ -17,9 +17,7 @@ module('Integration | Component | @frontile/forms/Radio', function (hooks) {
 
   test('it renders html attributes', async function (assert) {
     await render(
-      <template>
-        <Radio @label="Name" @value="test" @name="some-name" data-test-input />
-      </template>
+      <template><Radio @label="Name" @value="test" @name="some-name" data-test-input /></template>
     );
 
     assert.dom('[data-test-input]').exists();
@@ -27,9 +25,7 @@ module('Integration | Component | @frontile/forms/Radio', function (hooks) {
   });
 
   test('it should have id attr with matching label attr `for`', async function (assert) {
-    await render(
-      <template><Radio @label="Name" @value="test" data-test-input /></template>
-    );
+    await render(<template><Radio @label="Name" @value="test" data-test-input /></template>);
 
     const el = find('[data-test-input]') as HTMLInputElement;
     const id = el.getAttribute('id') || '';
@@ -59,11 +55,7 @@ module('Integration | Component | @frontile/forms/Radio', function (hooks) {
     await click('[data-test-input]');
 
     assert.dom('[data-test-input]').isChecked();
-    assert.equal(
-      myRadioValue.current,
-      'Cool',
-      'should have mutated the value '
-    );
+    assert.equal(myRadioValue.current, 'Cool', 'should have mutated the value ');
   });
 
   test('show error messages when errors has items', async function (assert) {
@@ -71,12 +63,7 @@ module('Integration | Component | @frontile/forms/Radio', function (hooks) {
     await render(
       <template>
         <div class="my-container">
-          <Radio
-            data-test-input
-            @value="test"
-            @errors={{errors.current}}
-            @label="Name"
-          />
+          <Radio data-test-input @value="test" @errors={{errors.current}} @label="Name" />
         </div>
       </template>
     );
@@ -87,9 +74,7 @@ module('Integration | Component | @frontile/forms/Radio', function (hooks) {
     await settled();
 
     assert.dom('[data-test-input]').hasAttribute('aria-invalid');
-    assert
-      .dom('[data-component="form-feedback"]')
-      .hasText('This field is required');
+    assert.dom('[data-component="form-feedback"]').hasText('This field is required');
   });
 
   test('do not show error messages if errors has no elements', async function (assert) {
@@ -110,13 +95,9 @@ module('Integration | Component | @frontile/forms/Radio', function (hooks) {
       base: 'my-base-class',
       input: 'my-input-class',
       labelContainer: 'my-label-container-class',
-      label: 'my-label-class'
+      label: 'my-label-class',
     };
-    await render(
-      <template>
-        <Radio @label="Cool" @value="test" @classes={{classes}} />
-      </template>
-    );
+    await render(<template><Radio @label="Cool" @value="test" @classes={{classes}} /></template>);
 
     assert.dom('.my-base-class').exists();
     assert.dom('.my-input-class').exists();

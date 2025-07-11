@@ -5,7 +5,7 @@ import {
   NotificationsContainer,
   type NotificationsService,
   type NotificationOptions,
-  type NotificationsContainerSignature
+  type NotificationsContainerSignature,
 } from '@frontile/notifications';
 import { registerCustomStyles } from '@frontile/theme';
 import { tv } from 'tailwind-variants';
@@ -22,13 +22,13 @@ registerCustomStyles({
         'top-right': 'notifications-container--top-right',
         'bottom-left': 'notifications-container--bottom-left',
         'bottom-center': 'notifications-container--bottom-center',
-        'bottom-right': 'notifications-container--bottom-right'
-      }
+        'bottom-right': 'notifications-container--bottom-right',
+      },
     },
     defaultVariants: {
-      placement: 'bottom-right'
-    }
-  })
+      placement: 'bottom-right',
+    },
+  }),
 });
 
 module(
@@ -38,17 +38,13 @@ module(
 
     const options: NotificationOptions = {
       transitionDuration: 0,
-      preserve: true
+      preserve: true,
     };
 
-    const placement =
-      cell<NotificationsContainerSignature['Args']['placement']>();
+    const placement = cell<NotificationsContainerSignature['Args']['placement']>();
 
     const template = <template>
-      <NotificationsContainer
-        @placement={{placement.current}}
-        data-test-notifications
-      />
+      <NotificationsContainer @placement={{placement.current}} data-test-notifications />
     </template>;
 
     test('it does not render if there are no notifications', async function (assert) {
@@ -58,9 +54,7 @@ module(
     });
 
     test('it render all notifications from service', async function (assert) {
-      const service = this.owner.lookup(
-        'service:notifications'
-      ) as NotificationsService;
+      const service = this.owner.lookup('service:notifications') as NotificationsService;
 
       service.add('Message 1', options);
       service.add('Message 2', options);
@@ -81,45 +75,31 @@ module(
 
       await render(template);
 
-      assert
-        .dom('[data-test-notifications]')
-        .hasClass('notifications-container--bottom-right');
+      assert.dom('[data-test-notifications]').hasClass('notifications-container--bottom-right');
 
       placement.current = 'top-left';
       await settled();
-      assert
-        .dom('[data-test-notifications]')
-        .hasClass('notifications-container--top-left');
+      assert.dom('[data-test-notifications]').hasClass('notifications-container--top-left');
 
       placement.current = 'top-center';
       await settled();
-      assert
-        .dom('[data-test-notifications]')
-        .hasClass('notifications-container--top-center');
+      assert.dom('[data-test-notifications]').hasClass('notifications-container--top-center');
 
       placement.current = 'top-right';
       await settled();
-      assert
-        .dom('[data-test-notifications]')
-        .hasClass('notifications-container--top-right');
+      assert.dom('[data-test-notifications]').hasClass('notifications-container--top-right');
 
       placement.current = 'bottom-left';
       await settled();
-      assert
-        .dom('[data-test-notifications]')
-        .hasClass('notifications-container--bottom-left');
+      assert.dom('[data-test-notifications]').hasClass('notifications-container--bottom-left');
 
       placement.current = 'bottom-center';
       await settled();
-      assert
-        .dom('[data-test-notifications]')
-        .hasClass('notifications-container--bottom-center');
+      assert.dom('[data-test-notifications]').hasClass('notifications-container--bottom-center');
 
       placement.current = 'bottom-right';
       await settled();
-      assert
-        .dom('[data-test-notifications]')
-        .hasClass('notifications-container--bottom-right');
+      assert.dom('[data-test-notifications]').hasClass('notifications-container--bottom-right');
     });
 
     test('it adds accessibility attributes', async function (assert) {
@@ -131,12 +111,8 @@ module(
       await render(template);
 
       assert.dom('[data-test-notifications]').hasAttribute('role', 'alert');
-      assert
-        .dom('[data-test-notifications]')
-        .hasAttribute('aria-live', 'assertive');
-      assert
-        .dom('[data-test-notifications]')
-        .hasAttribute('aria-atomic', 'true');
+      assert.dom('[data-test-notifications]').hasAttribute('aria-live', 'assertive');
+      assert.dom('[data-test-notifications]').hasAttribute('aria-atomic', 'true');
     });
   }
 );

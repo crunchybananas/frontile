@@ -8,20 +8,20 @@ module.exports = {
       files: ['*.js', '*.ts', '*.cjs', '.mjs', '.cts', '.mts', '.cts'],
       options: {
         singleQuote: true,
-        trailingComma: 'es5',
-      },
+        trailingComma: 'es5'
+      }
     },
     {
       files: ['*.json'],
       options: {
-        singleQuote: false,
-      },
+        singleQuote: false
+      }
     },
     {
       files: ['*.hbs'],
       options: {
-        singleQuote: false,
-      },
+        singleQuote: false
+      }
     },
     {
       files: ['*.gjs', '*.gts'],
@@ -29,8 +29,8 @@ module.exports = {
         parser: 'ember-template-tag',
         singleQuote: true,
         templateSingleQuote: false,
-        trailingComma: 'es5',
-      },
-    },
-  ],
+        trailingComma: 'es5'
+      }
+    }
+  ]
 };

@@ -16,20 +16,14 @@ module('Integration | Component | @frontile/forms/Checkbox', function (hooks) {
   });
 
   test('it renders html attributes', async function (assert) {
-    await render(
-      <template>
-        <Checkbox @label="Name" @name="some-name" data-test-input />
-      </template>
-    );
+    await render(<template><Checkbox @label="Name" @name="some-name" data-test-input /></template>);
 
     assert.dom('[data-test-input]').exists();
     assert.dom('[name="some-name"]').exists();
   });
 
   test('it should have id attr with matching label attr `for`', async function (assert) {
-    await render(
-      <template><Checkbox @label="Name" data-test-input /></template>
-    );
+    await render(<template><Checkbox @label="Name" data-test-input /></template>);
 
     const el = find('[data-test-input]') as HTMLInputElement;
     const id = el.getAttribute('id') || '';
@@ -58,19 +52,11 @@ module('Integration | Component | @frontile/forms/Checkbox', function (hooks) {
     await click('[data-test-input]');
 
     assert.dom('[data-test-input]').isChecked();
-    assert.equal(
-      myCheckboxValue.current,
-      true,
-      'should have mutated the value'
-    );
+    assert.equal(myCheckboxValue.current, true, 'should have mutated the value');
 
     await click('[data-test-input]');
     assert.dom('[data-test-input]').isNotChecked();
-    assert.equal(
-      myCheckboxValue.current,
-      false,
-      'should have mutated the value again'
-    );
+    assert.equal(myCheckboxValue.current, false, 'should have mutated the value again');
   });
 
   test('show error messages when errors has items', async function (assert) {
@@ -89,9 +75,7 @@ module('Integration | Component | @frontile/forms/Checkbox', function (hooks) {
     await settled();
 
     assert.dom('[data-test-input]').hasAttribute('aria-invalid');
-    assert
-      .dom('[data-component="form-feedback"]')
-      .hasText('This field is required');
+    assert.dom('[data-component="form-feedback"]').hasText('This field is required');
   });
 
   test('do not show error messages if errors has no elements', async function (assert) {
@@ -112,11 +96,9 @@ module('Integration | Component | @frontile/forms/Checkbox', function (hooks) {
       base: 'my-base-class',
       input: 'my-input-class',
       labelContainer: 'my-label-container-class',
-      label: 'my-label-class'
+      label: 'my-label-class',
     };
-    await render(
-      <template><Checkbox @label="Cool" @classes={{classes}} /></template>
-    );
+    await render(<template><Checkbox @label="Cool" @classes={{classes}} /></template>);
 
     assert.dom('.my-base-class').exists();
     assert.dom('.my-input-class').exists();

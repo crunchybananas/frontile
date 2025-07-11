@@ -1,12 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import {
-  render,
-  click,
-  fillIn,
-  triggerEvent,
-  triggerKeyEvent
-} from '@ember/test-helpers';
+import { render, click, fillIn, triggerEvent, triggerKeyEvent } from '@ember/test-helpers';
 
 import {
   Form,
@@ -16,7 +10,7 @@ import {
   Textarea,
   NativeSelect,
   Select,
-  type FormResultData
+  type FormResultData,
 } from '@frontile/forms';
 import { cell } from 'ember-resources';
 
@@ -52,11 +46,7 @@ module('Integration | Component | @frontile/forms/Form', function (hooks) {
           <Textarea @name="bio" />
           <NativeSelect @name="country" @items={{countries}} />
 
-          <Select
-            @name="traveledTo"
-            @items={{countries}}
-            @selectionMode="multiple"
-          />
+          <Select @name="traveledTo" @items={{countries}} @selectionMode="multiple" />
           <button type="submit">Submit</button>
         </Form>
       </template>
@@ -106,15 +96,12 @@ module('Integration | Component | @frontile/forms/Form', function (hooks) {
       interests: 'music',
       bio: 'My bio',
       country: 'Brazil',
-      traveledTo: ['Argentina', 'Chile']
+      traveledTo: ['Argentina', 'Chile'],
     });
   });
 });
 
-function selectNativeOptionByKey(
-  selectSelector: string,
-  key: string
-): Promise<void> {
+function selectNativeOptionByKey(selectSelector: string, key: string): Promise<void> {
   return changeOption('selectNativeOptionByKey', selectSelector, key, false);
 }
 
@@ -130,9 +117,7 @@ async function changeOption(
       `You called "${functionName}('${selectSelector}', '${key}')" but no select was found using selector "${selectSelector}"`
     );
   }
-  const option = select.querySelector(`[data-key="${key}"]`) as
-    | HTMLOptionElement
-    | undefined;
+  const option = select.querySelector(`[data-key="${key}"]`) as HTMLOptionElement | undefined;
   if (!option) {
     throw new Error(
       `You called "${functionName}('${selectSelector}', '${key}')" but no option with key "${key}" was found`

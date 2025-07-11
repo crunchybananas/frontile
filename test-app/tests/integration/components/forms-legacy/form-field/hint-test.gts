@@ -39,7 +39,7 @@ module('Integration | Component | @frontile/forms-legacy/FormField::Hint', funct
   });
 
   test('it adds size classes for @size', async function (assert) {
-    const size = cell<'sm'|'lg'>('sm');
+    const size = cell<'sm' | 'lg'>('sm');
 
     await render(<template><Hint data-test-input @size={{size.current}} /></template>);
 

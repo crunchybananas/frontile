@@ -60,9 +60,7 @@ module('Integration | Component | @frontile/forms-legacy/FormField::Input', func
     };
 
     await render(
-      <template>
-        <Input class="my-input" @value={{value.current}} @onInput={{setName}} />
-      </template>
+      <template><Input class="my-input" @value={{value.current}} @onInput={{setName}} /></template>
     );
 
     assert.dom('.my-input').hasValue('Josemar');
@@ -83,9 +81,7 @@ module('Integration | Component | @frontile/forms-legacy/FormField::Input', func
     };
 
     await render(
-      <template>
-        <Input class="my-input" @value={{value.current}} @onChange={{setName}} />
-      </template>
+      <template><Input class="my-input" @value={{value.current}} @onChange={{setName}} /></template>
     );
 
     assert.dom('.my-input').hasValue('Josemar');

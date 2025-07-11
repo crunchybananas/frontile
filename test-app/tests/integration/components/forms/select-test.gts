@@ -15,9 +15,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
   ): void => {
     const select = document.querySelector('[data-component="native-select"]');
     if (!select) {
-      throw new Error(
-        'did not find native-select to check if options is selected'
-      );
+      throw new Error('did not find native-select to check if options is selected');
     }
     const option = select.querySelector(queryString);
     const isSelected = option && (option as HTMLOptionElement).selected;
@@ -30,9 +28,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
   ): void => {
     const select = document.querySelector('[data-component="native-select"]');
     if (!select) {
-      throw new Error(
-        'did not find native-select to check if options is selected'
-      );
+      throw new Error('did not find native-select to check if options is selected');
     }
     const option = select.querySelector(queryString);
     const isSelected = option && (option as HTMLOptionElement).selected;
@@ -68,33 +64,16 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
     assert.dom('[data-component="native-select"] [data-key="item-4"]').exists();
     assert.dom('[data-component="native-select"] [data-key="item-5"]').exists();
 
-    assert
-      .dom('[data-component="native-select"] [data-key="item-3"]')
-      .hasAttribute('disabled');
-    assert
-      .dom('[data-component="native-select"] [data-key="item-4"]')
-      .hasAttribute('disabled');
+    assert.dom('[data-component="native-select"] [data-key="item-3"]').hasAttribute('disabled');
+    assert.dom('[data-component="native-select"] [data-key="item-4"]').hasAttribute('disabled');
 
-    assert
-      .dom('[data-component="native-select"] [data-key="item-1"]')
-      .containsText('Item 1');
-    assert
-      .dom('[data-component="native-select"] [data-key="item-2"]')
-      .containsText('Item 2');
-    assert
-      .dom('[data-component="native-select"] [data-key="item-3"]')
-      .containsText('Item 3');
-    assert
-      .dom('[data-component="native-select"] [data-key="item-4"]')
-      .containsText('Item 4');
-    assert
-      .dom('[data-component="native-select"] [data-key="item-5"]')
-      .containsText('Item 5');
+    assert.dom('[data-component="native-select"] [data-key="item-1"]').containsText('Item 1');
+    assert.dom('[data-component="native-select"] [data-key="item-2"]').containsText('Item 2');
+    assert.dom('[data-component="native-select"] [data-key="item-3"]').containsText('Item 3');
+    assert.dom('[data-component="native-select"] [data-key="item-4"]').containsText('Item 4');
+    assert.dom('[data-component="native-select"] [data-key="item-5"]').containsText('Item 5');
 
-    isNotSelected(
-      assert,
-      '[data-component="native-select"] [data-key="item-2"]'
-    );
+    isNotSelected(assert, '[data-component="native-select"] [data-key="item-2"]');
 
     await selectOptionByKey('[data-component="native-select"]', 'item-2');
 
@@ -111,28 +90,14 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
     assert.dom('[data-component="listbox"] [data-key="item-4"]').exists();
     assert.dom('[data-component="listbox"] [data-key="item-5"]').exists();
 
-    assert
-      .dom('[data-component="listbox"] [data-key="item-3"]')
-      .hasAttribute('disabled');
-    assert
-      .dom('[data-component="listbox"] [data-key="item-4"]')
-      .hasAttribute('disabled');
+    assert.dom('[data-component="listbox"] [data-key="item-3"]').hasAttribute('disabled');
+    assert.dom('[data-component="listbox"] [data-key="item-4"]').hasAttribute('disabled');
 
-    assert
-      .dom('[data-component="listbox"] [data-key="item-1"]')
-      .containsText('Item 1');
-    assert
-      .dom('[data-component="listbox"] [data-key="item-2"]')
-      .containsText('Item 2');
-    assert
-      .dom('[data-component="listbox"] [data-key="item-3"]')
-      .containsText('Item 3');
-    assert
-      .dom('[data-component="listbox"] [data-key="item-4"]')
-      .containsText('Item 4');
-    assert
-      .dom('[data-component="listbox"] [data-key="item-5"]')
-      .containsText('Item 5');
+    assert.dom('[data-component="listbox"] [data-key="item-1"]').containsText('Item 1');
+    assert.dom('[data-component="listbox"] [data-key="item-2"]').containsText('Item 2');
+    assert.dom('[data-component="listbox"] [data-key="item-3"]').containsText('Item 3');
+    assert.dom('[data-component="listbox"] [data-key="item-4"]').containsText('Item 4');
+    assert.dom('[data-component="listbox"] [data-key="item-5"]').containsText('Item 5');
 
     assert
       .dom('[data-component="listbox"] [data-key="item-2"]')
@@ -208,7 +173,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
     const animals = [
       { key: 'cheetah-key', value: 'cheetah-value' },
       { key: 'crocodile-key', value: 'crocodile-value' },
-      { key: 'elephant-key', value: 'elephant-value' }
+      { key: 'elephant-key', value: 'elephant-value' },
     ];
     const selectedKeys = cell<string[]>([]);
     const onSelectionChange = (keys: string[]) => (selectedKeys.current = keys);
@@ -246,14 +211,10 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
 
     assert.dom('[data-component="listbox"]').exists();
     assert.dom('[data-component="listbox"] [data-key="cheetah-key"]').exists();
-    assert
-      .dom('[data-component="listbox"] [data-key="crocodile-key"]')
-      .exists();
+    assert.dom('[data-component="listbox"] [data-key="crocodile-key"]').exists();
     assert.dom('[data-component="listbox"] [data-key="elephant-key"]').exists();
 
-    assert
-      .dom('[data-component="listbox"] [data-key="cheetah-key"]')
-      .containsText('cheetah-value');
+    assert.dom('[data-component="listbox"] [data-key="cheetah-key"]').containsText('cheetah-value');
     assert
       .dom('[data-component="listbox"] [data-key="crocodile-key"]')
       .containsText('crocodile-value');
@@ -324,9 +285,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
 
   test('it renders disabled select', async function (assert) {
     const animals = ['tiger'];
-    await render(
-      <template><Select @items={{animals}} @isDisabled={{true}} /></template>
-    );
+    await render(<template><Select @items={{animals}} @isDisabled={{true}} /></template>);
     assert.dom('[data-component="native-select"]').exists();
     assert.dom('[data-component="native-select"]').isDisabled;
     assert.dom('[data-component="select-trigger"]').isDisabled;
@@ -336,11 +295,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
     const animals = ['tiger'];
     await render(
       <template>
-        <Select
-          @items={{animals}}
-          @placeholder="Select an animal"
-          @isDisabled={{true}}
-        />
+        <Select @items={{animals}} @placeholder="Select an animal" @isDisabled={{true}} />
       </template>
     );
     assert.dom('[data-component="select-trigger"]').hasText('Select an animal');
@@ -351,11 +306,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
     const animals = ['tiger'];
     await render(
       <template>
-        <Select
-          @items={{animals}}
-          @placeholder="Select an animal"
-          @classes={{classes}}
-        >
+        <Select @items={{animals}} @placeholder="Select an animal" @classes={{classes}}>
           <:startContent>Start</:startContent>
           <:endContent>End</:endContent>
         </Select>
@@ -467,9 +418,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
     await fillIn('[data-test-id="trigger"]', 'XYZ');
 
     assert.dom('[data-test-id="empty-content"]').exists();
-    assert
-      .dom('[data-test-id="empty-content"]')
-      .hasText('No results found from blocks.');
+    assert.dom('[data-test-id="empty-content"]').hasText('No results found from blocks.');
   });
 
   test('it does not show empty content when hideEmptyContent is true', async function (assert) {
@@ -477,11 +426,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
 
     await render(
       <template>
-        <Select
-          @items={{items}}
-          @isFilterable={{true}}
-          @hideEmptyContent={{true}}
-        />
+        <Select @items={{items}} @isFilterable={{true}} @hideEmptyContent={{true}} />
       </template>
     );
 
@@ -494,9 +439,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
   test('it shows loading spinner when isLoading is true', async function (assert) {
     const items = ['Apple', 'Banana'];
 
-    await render(
-      <template><Select @items={{items}} @isLoading={{true}} /></template>
-    );
+    await render(<template><Select @items={{items}} @isLoading={{true}} /></template>);
 
     assert.dom('[data-test-id="loading-spinner"]').exists();
   });
@@ -504,9 +447,7 @@ module('Integration | Component | Select | @frontile/forms', function (hooks) {
   test('it hides loading spinner when isLoading is false', async function (assert) {
     const items = ['Apple', 'Banana'];
 
-    await render(
-      <template><Select @items={{items}} @isLoading={{false}} /></template>
-    );
+    await render(<template><Select @items={{items}} @isLoading={{false}} /></template>);
 
     assert.dom('[data-test-id="loading-spinner"]').doesNotExist();
   });
